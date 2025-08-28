@@ -2,8 +2,9 @@
 
 {% block "content" %}
 {% for post in posts %}
-<!--<a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg"-->
-<!--                  alt="..."/></a>-->
+{% if post.cover %}
+<img class="card-img-top" src="{{ post.cover.url }}" alt="..."/>
+{% endif %}
 <div class="card-body">
     <div class="small text-muted">{{ post.author }}, {{ post.date_created|date:"F d, Y H:i" }}</div>
     <h2 class="card-title">{{ post.title }}</h2>
