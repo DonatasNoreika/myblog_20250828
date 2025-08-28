@@ -8,6 +8,7 @@
     <div class="small text-muted">{{ post.author }}, {{ post.date_created|date:"F d, Y H:i" }}</div>
     <h2 class="card-title">{{ post.title }}</h2>
     <p class="card-text">{{ post.content|truncatewords:20 }}</p>
+    <p>Komentarų: {{ post.comments_count }}</p>
     <a class="btn btn-primary" href="{% url 'post' post.pk %}">Skaityti Daugiau →</a>
 </div>
 {% endfor %}

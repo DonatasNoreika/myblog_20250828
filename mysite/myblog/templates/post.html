@@ -8,7 +8,7 @@
     <h2 class="card-title">{{ post.title }}</h2>
     <p class="card-text">{{ post.content }}</p>
     <hr>
-    <h5>Komentarai:</h5>
+    <h5>Komentarai ({{ post.comments_count }}):</h5>
     {% for comment in post.comments.all %}
     <small>{{ comment.author }}, {{ post.date_created|date:"F d, Y H:i" }}</small>
     <p>{{ comment.content }}</p>
