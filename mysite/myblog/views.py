@@ -4,7 +4,7 @@ from .models import Post, Comment, CustomUser
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import FormMixin
-from .forms import CommentForm, CustomUserChangeForm
+from .forms import CommentForm, CustomUserChangeForm, CustomUserCreateForm
 from django.urls import reverse_lazy
 
 def search(request):
@@ -73,3 +73,9 @@ class ProfileUpdateView(LoginRequiredMixin, generic.UpdateView):
 
     def get_object(self, queryset=None):
         return self.request.user
+
+
+class SignUpView(generic.CreateView):
+    form_class = CustomUserCreateForm
+    template_name = "signup.html"
+    success_url = reverse_lazy("login")
