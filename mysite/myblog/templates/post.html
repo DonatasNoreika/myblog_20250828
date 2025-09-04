@@ -15,6 +15,15 @@
     <p class="card-text">{{ post.content|safe }}</p>
     <hr>
     <h5>Komentarai ({{ post.comments_count }}):</h5>
+    {% if user.is_authenticated %}
+    <h2>Palikite atsiliepimą</h2>
+    <form method="post" class="mb-2">
+        {% csrf_token %}
+        {% load crispy_forms_tags %}
+        {{ form | crispy }}
+        <button type="submit" class="btn btn-primary">Paskelbti</button>
+    </form>
+    {% endif %}
     {% for comment in post.comments.all %}
     <small>
         {% if comment.author.photo %}
