@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block "content" %}
+<h1 class="display-5 p-4">Mano Komentarai</h1>
+{% for comment in comments %}
+<hr>
+<div><b>Straipsnis: </b><a href="{% url 'post' comment.post.pk %}">{{ comment.post.title }}</a></div>
+<small>{{ comment.author }}, {{ comment.date_created | date:"F d, Y H:i" }}</small>
+<p>{{ comment.content }}</p>
+{% endfor %}
+{% endblock %}

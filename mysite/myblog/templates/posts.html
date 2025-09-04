@@ -2,6 +2,7 @@
 
 {% block "content" %}
 {% for post in posts %}
+<hr>
 {% if post.cover %}
 <img class="card-img-top" src="{{ post.cover.url }}" alt="..."/>
 {% endif %}

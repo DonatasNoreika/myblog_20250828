@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 
 {% block "content" %}
-
+<h1 class="display-5 p-4">Mano įrašai</h1>
 {% for post in posts %}
+<hr>
 {% if post.cover %}
 <img class="card-img-top" src="{{ post.cover.url }}" alt="..."/>
 {% endif %}
