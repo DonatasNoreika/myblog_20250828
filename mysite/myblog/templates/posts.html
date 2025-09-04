@@ -7,7 +7,12 @@
 <img class="card-img-top" src="{{ post.cover.url }}" alt="..."/>
 {% endif %}
 <div class="card-body">
-    <div class="small text-muted">{{ post.author }}, {{ post.date_created|date:"F d, Y H:i" }}</div>
+    <div class="small text-muted">
+        {% if post.author.photo %}
+        <img class="rounded-circle account-img" style="width: 25px" src="{{ post.author.photo.url }}">
+        {% endif %}
+        {{ post.author }}, {{ post.date_created|date:"F d, Y H:i" }}
+    </div>
     <h2 class="card-title">{{ post.title }}</h2>
     <p class="card-text">{{ post.content|truncatewords:20|safe }}</p>
     <p>Komentarų: {{ post.comments_count }}</p>

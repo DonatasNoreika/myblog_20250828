@@ -5,14 +5,23 @@
 <img class="card-img-top" src="{{ post.cover.url }}" alt="..."/>
 {% endif %}
 <div class="card-body">
-    <div class="small text-muted">{{ post.author }}, {{ post.date_created|date:"F d, Y H:i" }}</div>
+    <div class="small text-muted">
+        {% if post.author.photo %}
+        <img class="rounded-circle account-img" style="width: 25px" src="{{ post.author.photo.url }}">
+        {% endif %}
+        {{ post.author }}, {{ post.date_created|date:"F d, Y H:i" }}
+    </div>
     <h2 class="card-title">{{ post.title }}</h2>
     <p class="card-text">{{ post.content|safe }}</p>
     <hr>
     <h5>Komentarai ({{ post.comments_count }}):</h5>
     {% for comment in post.comments.all %}
-    <small>{{ comment.author }}, {{ comment.date_created|date:"F d, Y H:i" }}</small>
-    <p>{{ comment.content }}</p>
+    <small>
+        {% if comment.author.photo %}
+        <img class="rounded-circle account-img" style="width: 25px" src="{{ post.author.photo.url }}">
+        {% endif %}
+        {{ comment.author }}, {{ comment.date_created|date:"F d, Y H:i" }}</small>
+    <p>{{ comment.content|safe }}</p>
     {% endfor %}
 </div>
 {% endblock %}
