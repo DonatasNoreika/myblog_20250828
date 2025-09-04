@@ -1,10 +1,11 @@
 from django.shortcuts import render, reverse
 from django.views import generic
-from .models import Post, Comment
+from .models import Post, Comment, CustomUser
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import FormMixin
-from .forms import CommentForm
+from .forms import CommentForm, CustomUserChangeForm
+from django.urls import reverse_lazy
 
 def search(request):
     query = request.GET.get('query')
@@ -62,3 +63,13 @@ class UserCommentListView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         return Comment.objects.filter(author=self.request.user)
+
+class ProfileUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = CustomUser
+    form_class = CustomUserChangeForm
+    template_name = 'profile.html'
+    success_url = reverse_lazy('profile')
+    context_object_name = "user"
+
+    def get_object(self, queryset=None):
+        return self.request.user
