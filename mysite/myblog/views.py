@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import generic
 from .models import Post
 from django.db.models import Q
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def search(request):
     query = request.GET.get('query')
@@ -23,4 +24,14 @@ class PostDetailView(generic.DetailView):
     model = Post
     template_name = "post.html"
     context_object_name = "post"
+
+
+class UserPostListView(LoginRequiredMixin, generic.ListView):
+    model = Post
+    template_name = "user_posts.html"
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        return Post.objects.filter(author=self.request.user)
+
 
