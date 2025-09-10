@@ -4,12 +4,14 @@
 <h1 class="display-5 p-4">Mano Komentarai</h1>
 {% for comment in comments %}
 <hr>
+<div class="p-2">
 <div><b>Straipsnis: </b><a href="{% url 'post' comment.post.pk %}">{{ comment.post.title }}</a></div>
 <small>
         {% if comment.author.photo %}
-        <img class="rounded-circle account-img" style="width: 25px" src="{{ post.author.photo.url }}">
+        <img class="rounded-circle account-img" style="width: 25px" src="{{ comment.author.photo.url }}">
         {% endif %}
         {{ comment.author }}, {{ comment.date_created|date:"F d, Y H:i" }}</small>
 <p>{{ comment.content|safe }}</p>
+</div>
 {% endfor %}
 {% endblock %}
