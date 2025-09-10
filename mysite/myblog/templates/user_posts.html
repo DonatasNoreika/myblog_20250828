@@ -2,6 +2,9 @@
 
 {% block "content" %}
 <h1 class="display-5 p-4">Mano įrašai</h1>
+<div class="p-2">
+    <a href="{% url 'post_create' %}" class="btn btn-secondary">Naujas įrašas</a>
+</div>
 {% for post in posts %}
 <hr>
 {% if post.cover %}
