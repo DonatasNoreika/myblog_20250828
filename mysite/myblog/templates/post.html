@@ -40,7 +40,7 @@
     {% if comment.author == user %}
     <div>
         <a class="btn btn-secondary" href="{% url 'comment_update' post.pk comment.pk %}">Redaguoti</a>
-        <a class="btn btn-danger" href="">Ištrinti</a>
+        <a class="btn btn-danger" href="{% url 'comment_delete' post.pk comment.pk %}">Ištrinti</a>
     </div>
     {% endif %}
     {% endfor %}
