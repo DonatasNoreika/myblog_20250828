@@ -2,7 +2,7 @@ from django.shortcuts import render, reverse
 from django.views import generic
 from .models import Post, Comment, CustomUser
 from django.db.models import Q
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic.edit import FormMixin
 from .forms import CommentForm, CustomUserChangeForm, CustomUserCreateForm
 from django.urls import reverse_lazy
@@ -94,4 +94,16 @@ class PostCreateView(LoginRequiredMixin, generic.CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
+    model = Post
+    template_name = "post_form.html"
+    fields = ['title', 'content', 'cover']
+
+    def get_success_url(self):
+        return reverse("post", kwargs={"pk": self.get_object().pk})
+
+    def test_func(self):
+        return self.get_object().author == self.request.user
 
