@@ -13,10 +13,12 @@
     </div>
     <h2 class="card-title">{{ post.title }}</h2>
     <p class="card-text">{{ post.content|safe }}</p>
+    {% if post.author == user %}
     <div>
         <a class="btn btn-secondary" href="{% url 'post_update' post.pk %}">Redaguoti</a>
     </div>
     <hr>
+    {% endif %}
     <h5>Komentarai ({{ post.comments_count }}):</h5>
     {% if user.is_authenticated %}
     <h2>Palikite atsiliepimą</h2>
